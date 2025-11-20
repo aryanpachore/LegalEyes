@@ -1,7 +1,5 @@
 # ⚖️ LegalEyes
 
-> **"Resume Worded" for Legal Documents** — Simplify complex legal notices and agreements with AI trained on Indian Law.
-
 ## 📖 About The Project
 
 **LegalEyes** is a Capstone Project designed to democratize legal understanding. Much like how platforms like "Resume Worded" optimize professional profiles, LegalEyes breaks down complex legal documents into clear, actionable insights.
