@@ -1,0 +1,406 @@
+/* Custom styles for BuddyLawyer */
+:root {
+    --primary-50: #fffbeb;
+    --primary-100: #fef3c7;
+    --primary-200: #fde68a;
+    --primary-300: #fcd34d;
+    --primary-400: #fbbf24;
+    --primary-500: #f59e0b;
+    --primary-600: #d97706;
+    --primary-700: #b45309;
+    --primary-800: #92400e;
+    --primary-900: #78350f;
+    
+    --secondary-50: #f0fdf4;
+    --secondary-100: #dcfce7;
+    --secondary-200: #bbf7d0;
+    --secondary-300: #86efac;
+    --secondary-400: #4ade80;
+    --secondary-500: #22c55e;
+    --secondary-600: #16a34a;
+    --secondary-700: #15803d;
+    --secondary-800: #166534;
+    --secondary-900: #14532d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #374151;
+    /* Added background from theme variables */
+    background: var(--primary-50); 
+}
+
+/* Smooth transitions */
+* {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-400);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-500);
+}
+
+/* Animation classes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideIn {
+    animation: slideIn 0.3s ease-out;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Hover effects */
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient backgrounds */
+.gradient-amber {
+    background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
+}
+
+.gradient-green {
+    background: linear-gradient(135deg, var(--secondary-400), var(--secondary-600));
+}
+
+/* Glass effect */
+.glass {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Loading spinner */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-500);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 16px;
+    }
+}
+
+/* Custom button styles */
+.btn-amber {
+    background-color: var(--primary-500);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-amber:hover {
+    background-color: var(--primary-600);
+    transform: translateY(-1px);
+}
+
+.btn-amber-outline {
+    background-color: transparent;
+    color: var(--primary-500);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 2px solid var(--primary-500);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-amber-outline:hover {
+    background-color: var(--primary-50);
+    transform: translateY(-1px);
+}
+
+/* Card styles */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card-hover:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Focus styles */
+.focus-ring:focus {
+    outline: none;
+    /* Replicating Tailwind's ring */
+    box-shadow: 0 0 0 3px var(--primary-200); 
+    border-color: var(--primary-500);
+}
+
+/* Text selection */
+::selection {
+    background-color: var(--primary-200);
+    color: var(--primary-900);
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* === AUTH PAGES (Login / Signup) === */
+/* Styles added and updated to use global variables */
+
+/* Main container to center the form */
+.auth-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+  min-height: calc(100vh - 65px); /* Full height minus navbar */
+  animation: fadeIn 0.5s ease-out; /* Use animation from global css */
+}
+
+/* The white card, using .card styles as a base */
+.auth-container {
+  background: white;
+  border: 1px solid var(--primary-400); /* Use variable */
+  border-radius: 12px; /* Match global .card style */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 450px;
+  color: var(--primary-900); /* Set text color for the card */
+}
+
+.auth-container h2 {
+  color: var(--primary-800); /* Use variable */
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+/* Form styling */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--primary-900); /* Use variable */
+}
+
+.form-group input {
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--primary-400); /* Use variable */
+  border-radius: 8px; /* Match global button radius */
+  /* transition is global */
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-600); /* Use variable */
+  /* Use global focus ring style */
+  box-shadow: 0 0 0 3px var(--primary-200);
+}
+
+/* Primary button style */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600)); /* Use variables */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  /* transition is global */
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px); /* Use global hover-lift effect */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Google Button Style */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #ffffff;
+  color: #374151; /* Gray text */
+  border: 1px solid #d1d5db; /* Gray border */
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500; /* Medium weight, not bold */
+  cursor: pointer;
+  width: 100%;
+  text-decoration: none; /* In case we use an <a> tag */
+}
+
+.btn-google:hover {
+  background-color: #f9fafb; /* Very light gray */
+  transform: translateY(-1px);
+}
+
+.btn-google svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Divider "OR" Style */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #9ca3af; /* Gray-400 */
+  font-size: 0.875rem;
+  margin: 1.5rem 0; /* Same as form gap */
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #d1d5db; /* Gray-300 */
+}
+
+.auth-divider span {
+  padding: 0 1rem;
+}
+
+/* Link at the bottom */
+.auth-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--primary-900); /* Use variable */
+}
+
+.auth-link a {
+  color: var(--primary-800); /* Use variable */
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}

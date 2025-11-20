@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat - BuddyLawyer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-amber-50">
+    <custom-navbar></custom-navbar>
+    
+    <main class="min-h-screen flex flex-col" style="height: calc(100vh - 140px);">
+        <!-- Chat Container -->
+        <div class="flex-1 container mx-auto px-4 py-6">
+            <div class="bg-white rounded-xl shadow-lg border border-amber-200 h-full flex flex-col">
+                <!-- Chat Header -->
+                <div class="border-b border-amber-200 px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center">
+                                <i data-feather="cpu" class="text-white w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-semibold text-amber-900">BuddyLawyer AI Assistant</h2>
+                                <p class="text-sm text-green-600 flex items-center gap-1">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                    Online - Ready to help
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="clearChat()" class="p-2 hover:bg-amber-50 rounded-lg transition-colors">
+                                <i data-feather="trash-2" class="w-5 h-5 text-gray-600"></i>
+                            </button>
+                            <button class="p-2 hover:bg-amber-50 rounded-lg transition-colors">
+                                <i data-feather="settings" class="w-5 h-5 text-gray-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Area -->
+                <div id="chatMessages" class="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+                    <!-- Welcome Message -->
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-feather="cpu" class="text-white w-4 h-4"></i>
+                        </div>
+                        <div class="bg-amber-50 rounded-lg p-4 max-w-lg">
+                            <p class="text-gray-800">
+                                Hello! I'm BuddyLawyer, your AI legal assistant. I can help you with:
+                            </p>
+                            <ul class="mt-2 space-y-1 text-sm text-gray-700">
+                                <li>• Document summarization and analysis</li>
+                                <li>• Legal terminology explanations</li>
+                                <li>• Document drafting suggestions</li>
+                                <li>• Contract review assistance</li>
+                            </ul>
+                            <p class="mt-3 text-gray-800">
+                                How can I assist you today?
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Sample User Message -->
+                    <div class="flex gap-3 justify-end">
+                        <div class="bg-amber-600 text-white rounded-lg p-4 max-w-lg">
+                            <p>Can you help me understand what an NDA is and what it should include?</p>
+                        </div>
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-feather="user" class="text-gray-600 w-4 h-4"></i>
+                        </div>
+                    </div>
+
+                    <!-- Sample AI Response -->
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-feather="cpu" class="text-white w-4 h-4"></i>
+                        </div>
+                        <div class="bg-amber-50 rounded-lg p-4 max-w-lg">
+                            <p class="text-gray-800 mb-3">
+                                Absolutely! An NDA (Non-Disclosure Agreement) is a legal contract that establishes a confidential relationship between parties.
+                            </p>
+                            <div class="bg-white rounded-lg p-3 mb-3">
+                                <h4 class="font-semibold text-amber-900 mb-2">Key components of an NDA:</h4>
+                                <ul class="space-y-1 text-sm text-gray-700">
+                                    <li>• Definition of confidential information</li>
+                                    <li>• Obligations of receiving party</li>
+                                    <li>• Time period of confidentiality</li>
+                                    <li>• Exclusions from confidential information</li>
+                                    <li>• Consequences of breach</li>
+                                </ul>
+                            </div>
+                            <p class="text-gray-800">
+                                Would you like me to help you draft a basic NDA template or review an existing one?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="px-6 py-3 border-t border-amber-200">
+                    <div class="flex gap-2 overflow-x-auto pb-2">
+                        <button onclick="quickAction('summarize')" class="flex items-center gap-2 px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-700 rounded-full text-sm whitespace-nowrap transition-colors">
+                            <i data-feather="file-text" class="w-3 h-3"></i>
+                            Summarize Document
+                        </button>
+                        <button onclick="quickAction('explain')" class="flex items-center gap-2 px-3 py-1.5 bg-green-100 hover:bg-green-200 text-green-700 rounded-full text-sm whitespace-nowrap transition-colors">
+                            <i data-feather="help-circle" class="w-3 h-3"></i>
+                            Explain Term
+                        </button>
+                        <button onclick="quickAction('draft')" class="flex items-center gap-2 px-3 py-1.5 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm whitespace-nowrap transition-colors">
+                            <i data-feather="edit-3" class="w-3 h-3"></i>
+                            Draft Clause
+                        </button>
+                        <button onclick="quickAction('review')" class="flex items-center gap-2 px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-full text-sm whitespace-nowrap transition-colors">
+                            <i data-feather="check-circle" class="w-3 h-3"></i>
+                            Review Document
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="border-t border-amber-200 px-6 py-4">
+                    <form id="chatForm" class="flex gap-3">
+                        <div class="flex-1 relative">
+                            <textarea 
+                                id="messageInput"
+                                rows="1"
+                                placeholder="Ask me anything about legal documents..."
+                                class="w-full px-4 py-3 pr-12 border border-amber-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                onkeydown="handleKeyPress(event)"
+                            ></textarea>
+                            <button type="button" class="absolute right-2 bottom-2 p-2 hover:bg-amber-50 rounded-lg transition-colors">
+                                <i data-feather="paperclip" class="w-5 h-5 text-gray-500"></i>
+                            </button>
+                        </div>
+                        <button type="submit" class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
+                            <span>Send</span>
+                            <i data-feather="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <custom-footer></custom-footer>
+    
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Chat specific functions
+        document.getElementById('chatForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            sendMessage();
+        });
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Simulate AI response
+            setTimeout(() => {
+                const responses = [
+                    "I understand your question. Let me help you with that...",
+                    "That's a great question. Based on legal best practices...",
+                    "I can assist with that. Here's what you need to know...",
+                    "Let me break this down for you in simple terms..."
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addMessage(randomResponse, 'ai');
+            }, 1000);
+        }
+
+        function addMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex gap-3 ${sender === 'user' ? 'justify-end' : ''}`;
+            
+            if (sender === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="bg-amber-600 text-white rounded-lg p-4 max-w-lg">
+                        <p>${message}</p>
+                    </div>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-feather="user" class="text-gray-600 w-4 h-4"></i>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-feather="cpu" class="text-white w-4 h-4"></i>
+                    </div>
+                    <div class="bg-amber-50 rounded-lg p-4 max-w-lg">
+                        <p class="text-gray-800">${message}</p>
+                    </div>
+                `;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            feather.replace();
+        }
+
+        function clearChat() {
+            if (confirm('Are you sure you want to clear the chat history?')) {
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.innerHTML = `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-feather="cpu" class="text-white w-4 h-4"></i>
+                        </div>
+                        <div class="bg-amber-50 rounded-lg p-4 max-w-lg">
+                            <p class="text-gray-800">
+                                Chat cleared. How can I help you today?
+                            </p>
+                        </div>
+                    </div>
+                `;
+                feather.replace();
+            }
+        }
+
+        function quickAction(action) {
+            const actions = {
+                'summarize': 'Can you help me summarize my document?',
+                'explain': 'Can you explain a legal term for me?',
+                'draft': 'I need help drafting a legal clause.',
+                'review': 'Can you review my document for any issues?'
+            };
+            
+            document.getElementById('messageInput').value = actions[action];
+            document.getElementById('messageInput').focus();
+        }
+    </script>
+    <script>feather.replace();</script>
+</body>
+</html>
