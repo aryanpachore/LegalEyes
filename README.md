@@ -36,4 +36,38 @@ Dataset: Trained on thousands of Indian legal judgments, contracts, and constitu
 
 Objective: To extract key entities (Dates, Parties, Monetary Amounts, Obligations) rather than just shortening text.
 
+🛠️ Tech Stack
+
+Frontend
+
+HTML, CSS, JavaScript
+
+React.js
+
+Tailwind CSS
+
+shadcn/ui
+
+Backend
+
+Node.js
+
+Express.js
+
+Database
+
+MySQL
+
+Sequelize ORM
+
+Machine Learning & AI
+
+Python
+
+Hugging Face Transformers
+
+BART Model (Summarization)
+
+LLM & Gemini API (Chatbot)
+
 Tech: [Insert your specific tech here, e.g., Fine-tuned BERT/T5/Llama on Indian Legal text]
